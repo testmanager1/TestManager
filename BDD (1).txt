@@ -1,0 +1,41 @@
+#login
+Create table usuarios (
+ID Int UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+login Varchar(30),
+senha Varchar(40),
+Primary Key (ID)) ENGINE = MyISAM;
+
+
+
+# questões de prova
+CREATE DATABASE test manage;
+
+USE test manage;
+
+CREATE TABLE prova (cod_prova INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50), descricao VARCHAR(200));
+
+CREATE TABLE disciplina (sigla VARCHAR(5) PRIMARY KEY,
+nome VARCHAR(30));
+
+CREATE TABLE tema (cod_tema INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(30), sigla_disciplina VARCHAR(5), 
+CONSTRAINT `fk_disciplina` FOREIGN KEY (sigla_disciplina) REFERENCES
+disciplina(sigla));
+
+CREATE TABLE questao (cod_questao INT PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(30), descricao VARCHAR(200), cod_prova INT NOT NULL, 
+cod_tema INT,
+CONSTRAINT `fk_prova` FOREIGN KEY (cod_prova) REFERENCES prova(cod_prova),
+CONSTRAINT `fk_tema` FOREIGN KEY (cod_tema) REFERENCES tema(cod_tema));
+
+INSERT INTO disciplina (sigla, nome) VALUES 
+('PORT', 'Português'),
+('GEO', 'Geografia'),
+('MAT', 'Matemática'),
+('HIS', 'História'),
+('BIO', 'Biologia'),
+('FILO', 'Filosofia'); 
+
+
+INSERT INTO tema (nome, sigla_disciplina) VALUES
